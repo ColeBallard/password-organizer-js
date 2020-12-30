@@ -1,0 +1,11 @@
+#enter-password {
+    padding: 32px 20%;
+}
+
+#search {
+    display: none;
+}
+
+#password-list {
+    display: none;
+}

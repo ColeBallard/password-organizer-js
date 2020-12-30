@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <link href="style.css" rel="stylesheet">
+
+    <title>Password Organizer</title>
+  </head>
+  <body>
+    <div class="container-fluid" id="enter-password">
+        <label for="password" class="form-label">Enter Password</label>
+        <input type="password" id="password" class="form-control" aria-describedby="password-help-block">
+        <div id="password-help-block" class="form-text">
+            Your password must be 4-12 characters long, contain letters and/or numbers, and must not contain spaces or special characters. <br>
+            If you haven't created a password yet, make sure to write it down and keep it in a safe place because it will be the key to accessing all your other passwords.
+        </div>
+    </div>
+    <div class="container-fluid" id="search"></div>
+    <div class="container-fluid" id="password-list"></div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+    <script src="script.js"></script>
+
+  </body>
+</html>
