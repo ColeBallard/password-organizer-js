@@ -12,7 +12,7 @@
 
     <title>Password Organizer JS</title>
   </head>
-  <body>
+  <body class="bg-dark text-white">
     <div class="container-fluid" id="start">
         <div class="btn-group" id="start-btn-group" role="group" aria-label="Starting radio button toggle group">
             <input type="radio" class="btn-check" name="btn-radio" id="already-have-file" onclick="alreadyHaveFile()" autocomplete="off">
@@ -22,18 +22,19 @@
         </div>
     </div>
     <div class="container-fluid " id="access-file">
-        <form method="POST" enctype="multipart/form-data">
-            <input type="file" class="form-control" accept=".txt" aria-label="file example">
-            <button class="btn btn-primary col-md-12" type="submit">Submit</button>
+        <input type="file" class="form-control" id="input-file" accept=".txt" aria-label="upload encrypted password file">
+        <form onsubmit="download(this['name'].value, this['text'].value)">
+          <input type="text" name="name" value="test.txt">
+          <textarea name="text"></textarea>
+          <input type="submit" value="Download">
         </form>
-        
     </div>
     <div class="container-fluid" id="enter-password">
         <label for="password" class="form-label">Enter Password</label>
         <input type="password" id="password" class="form-control" aria-describedby="password-help-block">
         <div id="password-help-block" class="form-text">
             Your password must be 4-12 characters long, contain letters and/or numbers, and must not contain spaces or special characters. <br>
-            If you haven't created a password yet, make sure to write it down and keep it in a safe place because it will be the key to accessing all your other passwords.
+            Make sure to write down your password and keep it in a safe place because it will be the key to accessing all your other passwords.
         </div>
         <div id="password-warning-block" class="form-text">Please choose a suitable password.</div>
     </div>
