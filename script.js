@@ -45,37 +45,35 @@ function save(filename, data) {
     }
 }
 
+// function download(filename, text) {
+//     var element = document.createElement('a');
+//     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+//     element.setAttribute('download', filename);
+  
+//     element.style.display = 'none';
+//     document.body.appendChild(element);
+  
+//     element.click();
+  
+//     document.body.removeChild(element);
+// }
+
 function download(filename, text) {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename);
-  
-    element.style.display = 'none';
-    document.body.appendChild(element);
-  
-    element.click();
-  
-    document.body.removeChild(element);
-}
+    var reader = new FileReader();
+    var out = new Blob([text], { type: 'text/plain' });
+    reader.onload = function(e) {
+        window.location.href = reader.result;
+    }
+    reader.readAsDataURL(out);
 
-function download2() {
-    
-    
-var reader = new FileReader();
-var out = new Blob(["Hello bitches"], { type: 'application/pdf' });
-reader.onload = function(e) {
-    window.location.href = reader.result;
-}
-reader.readAsDataURL(out);
-
-// var blob = new Blob([response.data], { type: "application/pdf" });
-var fileURL = URL.createObjectURL(out);
-var a = document.createElement('a');
-a.href = fileURL;
-a.target = '_blank';
-a.download = 'lkn_.pdf';
-document.body.appendChild(a);
-a.click();
+    // var blob = new Blob([response.data], { type: "application/pdf" });
+    var fileURL = URL.createObjectURL(out);
+    var a = document.createElement('a');
+    a.href = fileURL;
+    a.target = '_blank';
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
 }
 
 function checkKeyPressed(event) {
