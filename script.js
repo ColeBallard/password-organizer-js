@@ -61,7 +61,7 @@ function download(filename, text) {
 function download2() {
     
     var out = new Blob(["Hello, world!"], {type: 'text/plain'});
-    link.href = URL.createObjectURL(blob);
+    link.href = URL.createObjectURL(out);
 
 link.click();
 
