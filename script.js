@@ -62,7 +62,7 @@ function download2() {
     
     
 var reader = new FileReader();
-var out = new Blob([response.data], { type: 'application/pdf' });
+var out = new Blob(["Hello bitches"], { type: 'application/pdf' });
 reader.onload = function(e) {
     window.location.href = reader.result;
 }
