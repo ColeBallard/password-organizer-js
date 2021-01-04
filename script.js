@@ -73,7 +73,7 @@ var fileURL = URL.createObjectURL(out);
 var a = document.createElement('a');
 a.href = fileURL;
 a.target = '_blank';
-a.download = 'lkn_' + id + '.pdf';
+a.download = 'lkn_.pdf';
 document.body.appendChild(a);
 a.click();
 }
