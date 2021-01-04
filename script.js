@@ -59,12 +59,13 @@ function download(filename, text) {
 }
 
 function download2() {
-    var reader = new FileReader();
+    
     var out = new Blob(["Hello, world!"], {type: 'text/plain'});
-    reader.onload = function(e){
-    window.location.href = reader.result;
-    }
-    reader.readAsDataURL(out);
+    link.href = URL.createObjectURL(blob);
+
+link.click();
+
+URL.revokeObjectURL(link.href);
 }
 
 function checkKeyPressed(event) {
