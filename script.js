@@ -50,13 +50,22 @@ function download(filename, text) {
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename);
   
-    element.style.display = 'block';
+    element.style.display = 'none';
     document.body.appendChild(element);
   
     element.click();
   
     document.body.removeChild(element);
-  }
+}
+
+function download2() {
+    var reader = new FileReader();
+    var out = new Blob(["Hello, world!"], {type: 'text/plain'});
+    reader.onload = function(e){
+    window.location.href = reader.result;
+    }
+    reader.readAsDataURL(out);
+}
 
 function checkKeyPressed(event) {
     if (event.keyCode == "13") enterPassword();
