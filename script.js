@@ -60,12 +60,22 @@ function download(filename, text) {
 
 function download2() {
     
-    var out = new Blob(["Hello, world!"], {type: 'text/plain'});
-    link.href = URL.createObjectURL(out);
+    
+var reader = new FileReader();
+var out = new Blob([response.data], { type: 'application/pdf' });
+reader.onload = function(e) {
+    window.location.href = reader.result;
+}
+reader.readAsDataURL(out);
 
-link.click();
-
-URL.revokeObjectURL(link.href);
+// var blob = new Blob([response.data], { type: "application/pdf" });
+var fileURL = URL.createObjectURL(out);
+var a = document.createElement('a');
+a.href = fileURL;
+a.target = '_blank';
+a.download = 'lkn_' + id + '.pdf';
+document.body.appendChild(a);
+a.click();
 }
 
 function checkKeyPressed(event) {
