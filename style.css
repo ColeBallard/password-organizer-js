@@ -64,6 +64,18 @@
     transform: translateY(-50%);
 }
 
+#add-data-btns {
+    display: none;
+}
+
+#add-row-btn {
+    margin: 0 8px;
+}
+
+#save-to-file-btn {
+    margin: 0 8px;
+}
+
 #search-bar {
     width: 60%;
     margin: 0 20%;

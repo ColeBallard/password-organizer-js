@@ -89,6 +89,7 @@ function addService() {
     hideElement("#search");
     hideElement("#add-btn");
     showElement("#add-data");
+    showElement("#add-data-btns");
 }
 
 function search() {
