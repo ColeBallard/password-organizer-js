@@ -7,7 +7,7 @@
     margin-left: 25%;
 }
 
-#access-file {
+#upload-file {
     display: none;
     padding: 32px 20%;
 }
@@ -22,10 +22,57 @@
     color: red;
 }
 
-#search {
+#password-access {
     display: none;
 }
 
-#password-list {
+#add-btn {
+    margin: 0 auto;
+    padding: 32px 0px;
+}
+
+#add-data {
+    display: none;
+    width: 80%;
+    margin: 32px 10%;
+    color: grey;
+    text-align: left;
+}
+
+.password-data {
+    position: relative;
+}
+
+.remove-btn {
+    position: absolute;
+    right: -13%;
+    -ms-transform: translateX(13%);
+    transform: translateX(13%);
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.remove-btn-hover {
+    display: none;
+    position: absolute;
+    right: -13%;
+    -ms-transform: translateX(13%);
+    transform: translateX(13%);
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+#search-bar {
+    width: 60%;
+    margin: 0 20%;
+}
+
+#search-content {
+    display: none;
+}
+
+#download-file {
     display: none;
 }

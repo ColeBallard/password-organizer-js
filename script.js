@@ -1,13 +1,30 @@
 document.querySelector("#input-file").addEventListener("change", getFile);
-document.querySelector("#password").addEventListener("keydown", checkKeyPressed, false);
 
-function alreadyHaveFile() {
+document.querySelector("#password").addEventListener("keydown", function() {
+    if (event.keyCode == "13") enterPassword();
+}, false);
+
+document.querySelector("#search-bar").addEventListener("keydown", function() {
+    if (event.keyCode == "13") search();
+}, false);
+
+document.querySelector(".remove-btn").addEventListener("mouseover", function() {
+    hideElement(".remove-btn");
+    showElement(".remove-btn-hover");
+});
+
+document.querySelector(".remove-btn").addEventListener("mouseout", function() {
+    hideElement(".remove-btn-hover");
+    showElement(".remove-btn");
+});
+
+function alreadyHaveFileBtn() {
     hideElement("#enter-password");
-    showElement("#access-file");
+    showElement("#upload-file");
 }
 
-function makeNewFile() {
-    hideElement("#access-file");
+function makeNewFileBtn() {
+    hideElement("#upload-file");
     showElement("#enter-password");
 }
 
@@ -45,6 +62,39 @@ function save(filename, data) {
     }
 }
 
+function enterPassword() {
+    var pass = document.querySelector("#password").value;
+    if (passwordValidation(pass) == true) {
+        hideElement("#password-warning-block");
+        hideElement("#start");
+        hideElement("#enter-password");
+        showElement("#password-access");
+    }
+    else showElement("#password-warning-block");
+}
+
+function passwordValidation(str) {
+    if (str.length < 4 || str.length > 12) return false;
+    else;
+    var validChar = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    for (var i = 0; i <= (str.length - 1); i++) {
+        if (!(validChar.includes(str.charAt(i))))
+            return false;
+        else;
+    }
+    return true;
+}
+
+function addService() {
+    hideElement("#search");
+    hideElement("#add-btn");
+    showElement("#add-data");
+}
+
+function search() {
+    var searchPhrase = document.querySelector("#search-bar").value;
+}
+
 // function download(filename, text) {
 //     var element = document.createElement('a');
 //     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -66,7 +116,6 @@ function download(filename, text) {
     }
     reader.readAsDataURL(out);
 
-    // var blob = new Blob([response.data], { type: "application/pdf" });
     var fileURL = URL.createObjectURL(out);
     var a = document.createElement('a');
     a.href = fileURL;
@@ -74,31 +123,6 @@ function download(filename, text) {
     a.download = filename;
     document.body.appendChild(a);
     a.click();
-}
-
-function checkKeyPressed(event) {
-    if (event.keyCode == "13") enterPassword();
-    else;
-}
-
-function enterPassword() {
-    var pass = document.querySelector("#password").value;
-    if (validation(pass) == true) {
-        hideElement("#password-warning-block");
-    }
-    else showElement("#password-warning-block");
-}
-
-function validation(str) {
-    if (str.length < 4 || str.length > 12) return false;
-    else;
-    var validChar = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    for (var i = 0; i <= (str.length - 1); i++) {
-        if (!(validChar.includes(str.charAt(i))))
-            return false;
-        else;
-    }
-    return true;
 }
 
 function showElement(id) {
