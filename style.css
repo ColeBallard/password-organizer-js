@@ -34,34 +34,19 @@
 #add-data {
     display: none;
     width: 80%;
-    margin: 32px 10%;
+    margin: 32px 12% 32px 8%;
     color: grey;
     text-align: left;
 }
 
-.password-data {
-    position: relative;
+.data-textarea-btn-group {
+    position: absolute;
+    right: -12%;
+    top: 25%;
 }
 
-.remove-btn {
-    position: absolute;
-    right: -13%;
-    -ms-transform: translateX(13%);
-    transform: translateX(13%);
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
-
-.remove-btn-hover {
-    display: none;
-    position: absolute;
-    right: -13%;
-    -ms-transform: translateX(13%);
-    transform: translateX(13%);
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+.modal {
+    color: gray;
 }
 
 #add-data-btns {

@@ -1,3 +1,5 @@
+var addRowCount = 0;
+
 document.querySelector("#input-file").addEventListener("change", getFile);
 
 document.querySelector("#password").addEventListener("keydown", function() {
@@ -7,16 +9,6 @@ document.querySelector("#password").addEventListener("keydown", function() {
 document.querySelector("#search-bar").addEventListener("keydown", function() {
     if (event.keyCode == "13") search();
 }, false);
-
-document.querySelector(".remove-btn").addEventListener("mouseover", function() {
-    hideElement(".remove-btn");
-    showElement(".remove-btn-hover");
-});
-
-document.querySelector(".remove-btn").addEventListener("mouseout", function() {
-    hideElement(".remove-btn-hover");
-    showElement(".remove-btn");
-});
 
 function alreadyHaveFileBtn() {
     hideElement("#enter-password");
@@ -90,6 +82,56 @@ function addService() {
     hideElement("#add-btn");
     showElement("#add-data");
     showElement("#add-data-btns");
+}
+
+function addDataRow() {
+    addRowCount++;
+    var dataRow = document.querySelector(".data-row").cloneNode(true);
+
+    var dataTextArr = dataRow.querySelectorAll(".form-control");
+    dataTextArr[0].id = "data-title-textarea" + addRowCount;
+    dataTextArr[0].value = "";
+    dataTextArr[1].id = "data-textarea" + addRowCount;
+    dataTextArr[1].value = "";
+
+    var labelArr = dataRow.querySelectorAll("label");
+    labelArr[0].setAttribute("for", "data-title-textarea" + addRowCount);
+    labelArr[1].setAttribute("for", "data-textarea" + addRowCount);
+
+    dataRow.querySelector(".dropdown-toggle").setAttribute("for", "data-textarea" + addRowCount);
+
+    document.querySelector("#add-data").appendChild(dataRow);
+}
+
+function saveToFile()
+
+function deleteDataRow(element) {
+    if ((addRowCount + 1) >= 2) {
+        addRowCount--;
+        element.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
+    }
+    else {
+        var modal = new bootstrap.Modal(document.querySelector("#add-data-modal"), { keyboard: true });
+        modal.show();
+    }
+}
+
+function generateRandomPassword(element) {
+    const SAFE_CHARS = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", PASS_MIN = 12, PASS_MAX = 18;
+    var password = "";
+
+    for (var i = 0; i <= (Math.floor(Math.random() * PASS_MAX) + PASS_MIN - 1); i++)
+        password += SAFE_CHARS.charAt(Math.floor(Math.random() * SAFE_CHARS.length));
+   
+    element.parentElement.parentElement.parentElement.parentElement.querySelector(".form-control").value = password;
+}
+
+function copyContent(element) {
+    var textArea = element.parentElement.parentElement.parentElement.parentElement.querySelector(".form-control");
+    textArea.select();
+    textArea.setSelectionRange(0, 99999);
+
+    document.execCommand("copy");
 }
 
 function search() {
