@@ -103,7 +103,9 @@ function addDataRow() {
     document.querySelector("#add-data").appendChild(dataRow);
 }
 
-function saveToFile()
+function saveToFile() {
+
+}
 
 function deleteDataRow(element) {
     if ((addRowCount + 1) >= 2) {
