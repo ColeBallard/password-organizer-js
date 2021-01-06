@@ -61,6 +61,9 @@ function enterPassword() {
         hideElement("#start");
         hideElement("#enter-password");
         showElement("#password-access");
+        // Search bar is auto selected
+        document.querySelector("#search-bar").select();
+        document.querySelector("#search-bar").setSelectionRange(0, 99999);
     }
     else showElement("#password-warning-block");
 }
@@ -78,10 +81,8 @@ function passwordValidation(str) {
 }
 
 function addService() {
-    hideElement("#search");
-    hideElement("#add-btn");
+    hideElement("#password-access");
     showElement("#add-data");
-    showElement("#add-data-btns");
 }
 
 function addDataRow() {
@@ -105,6 +106,11 @@ function addDataRow() {
 
 function saveToFile() {
 
+}
+
+function cancelAddData() {
+    hideElement("#add-data");
+    showElement("#password-access");
 }
 
 function deleteDataRow(element) {

@@ -26,7 +26,12 @@
     display: none;
 }
 
-#add-btn {
+#search-bar {
+    width: 60%;
+    margin: 0 20%;
+}
+
+#add-service-btn {
     margin: 0 auto;
     padding: 32px 0px;
 }
@@ -45,12 +50,13 @@
     top: 25%;
 }
 
-.modal {
-    color: gray;
+#add-data-btns {
+    margin: 16px 0;
+    text-align: center;
 }
 
-#add-data-btns {
-    display: none;
+.add-data-btn {
+    margin: 4px;
 }
 
 #add-row-btn {
@@ -61,12 +67,11 @@
     margin: 0 8px;
 }
 
-#search-bar {
-    width: 60%;
-    margin: 0 20%;
+.modal {
+    color: gray;
 }
 
-#search-content {
+#search-results {
     display: none;
 }
 

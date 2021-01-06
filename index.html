@@ -34,10 +34,16 @@
         <div id="password-warning-block" class="form-text">Please choose a suitable password.</div>
     </div>
     <div class="container-fluid text-center" id="password-access">
-      <div id="add-btn">
+      <div class="container-fluid text-center" id="add-service-btn">
         <button type="button" class="btn btn-primary" onclick="addService()">Add service</button>
       </div>
-      <div class="card container-fluid" id="add-data">
+      <div class="container-fluid text-center">
+        <input class="form-control form-control" id="search-bar" type="text" placeholder="Search for service.." aria-label="Password service search">
+      </div>
+      <div id="search-results"></div>
+    </div>
+    <div class="container-fluid" id="add-data">
+      <div class="card container-fluid">
         <div class="form-floating row">
           <textarea class="form-control col-sm-12" placeholder="eg. facebook" id="service-textarea0"></textarea>
           <label for="service-textarea0">Service</label>
@@ -61,6 +67,11 @@
           </div>
         </div>
       </div>
+      <div id="add-data-btns">
+        <button type="button" class="btn btn-primary btn-sm add-data-btn" id="add-row-btn" onclick="addDataRow()">Add row</button>
+        <button type="button" class="btn btn-primary btn-sm add-data-btn" id="save-to-file-btn" onclick="saveToFile()">Save to file</button>
+        <button type="button" class="btn btn-primary btn-sm add-data-btn" id="cancel-add-btn" onclick="cancelAddData()">Cancel</button>
+      </div>
       <div class="modal fade" id="add-data-modal" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -74,16 +85,6 @@
           </div>
         </div>
       </div>
-      <div id="add-data-btns">
-        <button type="button" class="btn btn-primary" id="add-row-btn" onclick="addDataRow()">Add row</button>
-        <button type="button" class="btn btn-primary" id="save-to-file-btn" onclick="saveToFile()">Save to file</button>
-        <button type="button" class="btn btn-primary" id="cancel-add-btn" onclick="cancelAddData()">Cancel</button>
-      </div>
-      <div id="search">
-        <input class="form-control form-control" id="search-bar" type="text" placeholder="Search for service.." aria-label="Password service search">
-        <div id="search-results"></div>
-      </div>
-      
     </div>
     <div class="container-fluid" id="download-file">
       <form onsubmit="download(this['name'].value, this['text'].value)">
