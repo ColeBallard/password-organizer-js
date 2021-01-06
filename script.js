@@ -1,9 +1,14 @@
-var addRowIndex = 0;
+const EOS = "{endofservice}", EODT = "{endofdatatitle}", EOD = "{endofdata}", EOB = "{endofblock}";
+var passStr = "", addRowIndex = 0;
 
 document.querySelector("#input-file").addEventListener("change", getFile);
 
-document.querySelector("#password").addEventListener("keydown", function() {
+document.querySelector("#enter-password-input").addEventListener("keydown", function() {
     if (event.keyCode == "13") enterPassword();
+}, false);
+
+document.querySelector("#create-password-input").addEventListener("keydown", function() {
+    if (event.keyCode == "13") createPassword();
 }, false);
 
 document.querySelector("#search-bar").addEventListener("keydown", function() {
@@ -11,21 +16,23 @@ document.querySelector("#search-bar").addEventListener("keydown", function() {
 }, false);
 
 function alreadyHaveFileBtn() {
-    hideElement("#enter-password");
+    hideElement("#create-password");
     showElement("#upload-file");
 }
 
 function makeNewFileBtn() {
     hideElement("#upload-file");
-    showElement("#enter-password");
+    showElement("#create-password");
+    autoSelect("#create-password-input");
 }
 
 function getFile(event) {
 	const input = event.target;
     if ("files" in input && input.files.length > 0)
         readFileContent(input.files[0]).then(content => {
-            document.querySelector("#content-target").value = content;
-            save("pojs.txt", content);
+            if (validateFile())
+                showElement("#enter-password");
+            else;
         }).catch(error => console.log(error));
     else;
 }
@@ -33,37 +40,51 @@ function getFile(event) {
 function readFileContent(file) {
 	const reader = new FileReader();
     return new Promise((resolve, reject) => {
-    reader.onload = event => resolve(event.target.result);
-    reader.onerror = error => reject(error);
-    reader.readAsText(file);
+        reader.onload = event => resolve(event.target.result);
+        reader.onerror = error => reject(error);
+        reader.readAsText(file);
     });
 }
 
-function save(filename, data) {
-    var blob = new Blob([data], {type: 'text/csv'});
-    if (window.navigator.msSaveOrOpenBlob) {
-        window.navigator.msSaveBlob(blob, filename);
+// function save(filename, data) {
+//     var blob = new Blob([data], {type: 'text/csv'});
+//     if (window.navigator.msSaveOrOpenBlob) {
+//         window.navigator.msSaveBlob(blob, filename);
+//     }
+//     else {
+//         var elem = window.document.createElement('a');
+//         elem.href = window.URL.createObjectURL(blob);
+//         elem.download = filename;        
+//         document.body.appendChild(elem);
+//         elem.click();        
+//         document.body.removeChild(elem);
+//     }
+// }
+
+function validateFile() {
+    // Check if file has correct paarsing
+    if (true) {
+        return true;
     }
     else {
-        var elem = window.document.createElement('a');
-        elem.href = window.URL.createObjectURL(blob);
-        elem.download = filename;        
-        document.body.appendChild(elem);
-        elem.click();        
-        document.body.removeChild(elem);
+        showElement("#file-warning-block");
+        return false;
     }
 }
 
 function enterPassword() {
-    var pass = document.querySelector("#password").value;
+
+}
+
+function createPassword() {
+    var pass = document.querySelector("#create-password-input").value;
     if (passwordValidation(pass) == true) {
         hideElement("#password-warning-block");
         hideElement("#start");
-        hideElement("#enter-password");
+        hideElement("#create-password");
         showElement("#password-access");
         // Search bar is auto selected
-        document.querySelector("#search-bar").select();
-        document.querySelector("#search-bar").setSelectionRange(0, 99999);
+        autoSelect("#search-bar");
     }
     else showElement("#password-warning-block");
 }
@@ -83,6 +104,11 @@ function passwordValidation(str) {
 function addService() {
     hideElement("#password-access");
     showElement("#add-data");
+    autoSelect("#service-textarea");
+}
+
+function saveAndDownload() {
+    
 }
 
 function addDataRow() {
@@ -103,17 +129,60 @@ function addDataRow() {
 }
 
 function saveToFile() {
+    if (document.querySelector("#service-textarea").value.trim() == "") {
+        var modal = new bootstrap.Modal(document.querySelector("#save-data-modal"), { keyboard: true });
+        modal.show();
+        return;
+    }
+    else;
+    
+    var str = document.querySelector("#service-textarea").value.trim() + EOS;
+    var dataTextArr = document.querySelectorAll(".add-data-textarea");
+    for (var i = 0; i <= (dataTextArr.length - 1); i+=2) {
+        if (!(dataTextArr[i].value == "" && dataTextArr[i + 1].value == "")) {
+            str += dataTextArr[i].value + EODT;
+            str += dataTextArr[i + 1].value + EOD;
+        } 
+        else;
+    }
+    str += EOB;
+    getServiceArray();
+}
 
+function getServiceArray() {
+    var serviceArr = [], serviceArrIndexes = [0];
+    // Example string
+    passStr  = "service1{endofservice}title1{endofdatatitle}data1{endofdata}title2{endofdatatitle}data2{endofdata}title3{endofdatatitle}data3{endofdata}title4{endofdatatitle}data4{endofdata}{endofblock}service2{endofservice}title1{endofdatatitle}data1{endofdata}title2{endofdatatitle}data2{endofdata}title3{endofdatatitle}data3{endofdata}title4{endofdatatitle}data4{endofdata}{endofblock}service3{endofservice}title1{endofdatatitle}data1{endofdata}title2{endofdatatitle}data2{endofdata}title3{endofdatatitle}data3{endofdata}title4{endofdatatitle}data4{endofdata}{endofblock}";
+    var i = -1;
+    while((i = passStr.indexOf(EOS, i + 1)) >= 0) 
+        serviceArrIndexes.push(i);
+    
+    i  = -1;
+    while((i = passStr.indexOf(EOB, i + 1)) >= 0) 
+        serviceArrIndexes.push(i + 12);
+
+    serviceArrIndexes.sort(function(a, b){return a - b});
+    
+    for (var j = 0; j <= (serviceArrIndexes.length - 2); j+=2) {
+        serviceArr.push(passStr.slice(serviceArrIndexes[j], serviceArrIndexes[j + 1]));
+    }
+    console.log(serviceArr);
+    return serviceArr;
 }
 
 function cancelAddData() {
-    hideElement("#add-data");
-    showElement("#password-access");
     for (var i = 0; i <= (addRowIndex - 1); i++) 
         document.querySelector("#add-data-card").lastChild.remove();
+
     document.querySelector("#service-textarea").value = "";
     document.querySelector("#data-title-textarea0").value = "Password";
     document.querySelector("#data-textarea0").value = "";
+    hideElement("#add-data");
+
+    showElement("#password-access");
+    document.querySelector("#search-bar").value = "";
+    autoSelect("#search-bar");
+
     addRowIndex = 0;
 }
 
@@ -178,6 +247,11 @@ function download(filename, text) {
     a.download = filename;
     document.body.appendChild(a);
     a.click();
+}
+
+function autoSelect(element) {
+    document.querySelector(element).select();
+    document.querySelector(element).setSelectionRange(0, 99999);
 }
 
 function showElement(id) {

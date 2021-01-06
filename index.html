@@ -23,10 +23,15 @@
     </div>
     <div class="container-fluid " id="upload-file">
         <input type="file" class="form-control" id="input-file" accept=".txt" aria-label="upload encrypted password file">
+        <div id="file-warning-block" class="form-text">Please choose a file encrypted by this website.</div>
+        <div class="container-fluid" id="enter-password">
+          <label for="enter-password-input" class="form-label">Enter Password</label>
+          <input type="password" id="enter-password-input" class="form-control">
+        </div>
     </div>
-    <div class="container-fluid" id="enter-password">
-        <label for="password" class="form-label">Enter Password</label>
-        <input type="password" id="password" class="form-control" aria-describedby="password-help-block">
+    <div class="container-fluid" id="create-password">
+        <input type="password" id="create-password-input" class="form-control">
+        <label for="create-password-input" class="form-label">Create Password</label>
         <div id="password-help-block" class="form-text">
             Your password must be 4-12 characters long, contain letters and/or numbers, and must not contain spaces or special characters. <br>
             Make sure to write down your password and keep it in a safe place because it will be the key to accessing all your other passwords.
@@ -36,6 +41,7 @@
     <div class="container-fluid text-center" id="password-access">
       <div class="container-fluid text-center" id="add-service-btn">
         <button type="button" class="btn btn-primary" onclick="addService()">Add service</button>
+        <button type="button" class="btn btn-primary" onclick="saveAndDownload()">Save and download</button>
       </div>
       <div class="container-fluid text-center">
         <input class="form-control form-control" id="search-bar" type="text" placeholder="Search for service.." aria-label="Password service search">
@@ -50,11 +56,11 @@
         </div>
         <div class="row data-row">
           <div class="form-floating col-sm-4 g-0">
-            <textarea class="form-control" placeholder="eg. password" id="data-title-textarea0">Password</textarea>
+            <textarea class="form-control add-data-textarea" placeholder="eg. password" id="data-title-textarea0">Password</textarea>
             <label for="data-title-textarea0">Data Title</label>
           </div>
           <div class="form-floating col-sm-8 g-0 position-relative">
-            <textarea class="form-control" placeholder="eg. easypassword123" id="data-textarea0"></textarea>
+            <textarea class="form-control add-data-textarea" placeholder="eg. easypassword123" id="data-textarea0"></textarea>
             <label for="data-textarea0">Data</label>
             <div class="btn-group data-textarea-btn-group">
               <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" for="data-textarea0"></button>
@@ -79,6 +85,19 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body"> Each service must contain at least one data row. </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="save-data-modal" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body"> Service can't be empty. </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>

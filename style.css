@@ -12,7 +12,16 @@
     padding: 32px 20%;
 }
 
+#file-warning-block {
+    display: none;
+}
+
 #enter-password {
+    display: none;
+    margin: 32px 0;
+}
+
+#create-password {
     display: none;
     padding: 0 20%;
 }
