@@ -1,4 +1,4 @@
-var addRowCount = 0;
+var addRowIndex = 0;
 
 document.querySelector("#input-file").addEventListener("change", getFile);
 
@@ -86,22 +86,20 @@ function addService() {
 }
 
 function addDataRow() {
-    addRowCount++;
+    addRowIndex++;
     var dataRow = document.querySelector(".data-row").cloneNode(true);
 
     var dataTextArr = dataRow.querySelectorAll(".form-control");
-    dataTextArr[0].id = "data-title-textarea" + addRowCount;
+    dataTextArr[0].id = "data-title-textarea" + addRowIndex;
     dataTextArr[0].value = "";
-    dataTextArr[1].id = "data-textarea" + addRowCount;
+    dataTextArr[1].id = "data-textarea" + addRowIndex;
     dataTextArr[1].value = "";
 
     var labelArr = dataRow.querySelectorAll("label");
-    labelArr[0].setAttribute("for", "data-title-textarea" + addRowCount);
-    labelArr[1].setAttribute("for", "data-textarea" + addRowCount);
+    labelArr[0].setAttribute("for", "data-title-textarea" + addRowIndex);
+    labelArr[1].setAttribute("for", "data-textarea" + addRowIndex);
 
-    dataRow.querySelector(".dropdown-toggle").setAttribute("for", "data-textarea" + addRowCount);
-
-    document.querySelector("#add-data").appendChild(dataRow);
+    document.querySelector("#add-data-card").appendChild(dataRow);
 }
 
 function saveToFile() {
@@ -111,11 +109,17 @@ function saveToFile() {
 function cancelAddData() {
     hideElement("#add-data");
     showElement("#password-access");
+    for (var i = 0; i <= (addRowIndex - 1); i++) 
+        document.querySelector("#add-data-card").lastChild.remove();
+    document.querySelector("#service-textarea").value = "";
+    document.querySelector("#data-title-textarea0").value = "Password";
+    document.querySelector("#data-textarea0").value = "";
+    addRowIndex = 0;
 }
 
 function deleteDataRow(element) {
-    if ((addRowCount + 1) >= 2) {
-        addRowCount--;
+    if ((addRowIndex + 1) >= 2) {
+        addRowIndex--;
         element.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
     }
     else {
