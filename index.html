@@ -13,6 +13,7 @@
     <title>Password Organizer JS</title>
   </head>
   <body class="bg-dark text-white">
+
     <div class="container-fluid" id="start">
         <div class="btn-group" id="start-btn-group" role="group" aria-label="Starting radio button toggle group">
             <input type="radio" class="btn-check" name="btn-radio" id="already-have-file-btn" onclick="alreadyHaveFileBtn()" autocomplete="off">
@@ -21,6 +22,7 @@
             <label class="btn btn-outline-primary" for="make-new-file-btn">Make a new file</label>
         </div>
     </div>
+
     <div class="container-fluid " id="upload-file">
         <input type="file" class="form-control" id="input-file" accept=".txt" aria-label="upload encrypted password file">
         <div id="file-warning-block" class="form-text">Please choose a file encrypted by this website.</div>
@@ -29,8 +31,9 @@
           <input type="password" id="enter-password-input" class="form-control">
         </div>
     </div>
+
     <div class="container-fluid" id="create-password">
-        <input type="password" id="create-password-input" class="form-control">
+        <input type="password" id="create-password-input" class="form-control mb-2">
         <label for="create-password-input" class="form-label">Create Password</label>
         <div id="password-help-block" class="form-text">
             Your password must be 4-12 characters long, contain letters and/or numbers, and must not contain spaces or special characters. <br>
@@ -38,17 +41,20 @@
         </div>
         <div id="password-warning-block" class="form-text">Please choose a suitable password.</div>
     </div>
+
     <div class="container-fluid text-center" id="password-access">
       <div class="container-fluid text-center" id="add-service-btn">
-        <button type="button" class="btn btn-primary" onclick="addService()">Add service</button>
-        <button type="button" class="btn btn-primary" onclick="saveAndDownload()">Save and download</button>
+        <button type="button" class="btn btn-primary m-2" onclick="addService()">Add service</button>
+        <button type="button" class="btn btn-primary m-2" onclick="saveAndDownload()">Save and download</button>
       </div>
       <div class="container-fluid text-center">
         <input class="form-control form-control" id="search-bar" type="text" placeholder="Search for service.." aria-label="Password service search">
       </div>
       <div id="search-results"></div>
     </div>
+
     <div class="container-fluid" id="add-data">
+
       <div class="card container-fluid" id="add-data-card">
         <div class="form-floating row">
           <textarea class="form-control col-sm-12" placeholder="eg. facebook" id="service-textarea"></textarea>
@@ -73,11 +79,13 @@
           </div>
         </div>
       </div>
+
       <div id="add-data-btns">
         <button type="button" class="btn btn-primary btn-sm add-data-btn" id="add-row-btn" onclick="addDataRow()">Add row</button>
         <button type="button" class="btn btn-primary btn-sm add-data-btn" id="save-to-file-btn" onclick="saveToFile()">Save to file</button>
         <button type="button" class="btn btn-primary btn-sm add-data-btn" id="cancel-add-btn" onclick="cancelAddData()">Cancel</button>
       </div>
+
       <div class="modal fade" id="add-data-modal" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -105,6 +113,7 @@
         </div>
       </div>
     </div>
+    
     <div class="container-fluid" id="download-file">
       <form onsubmit="download(this['name'].value, this['text'].value)">
         <input type="text" name="name" value="test.txt">

@@ -136,20 +136,33 @@ function saveToFile() {
     }
     else;
     
-    var str = document.querySelector("#service-textarea").value.trim() + EOS;
+    var serviceStr = document.querySelector("#service-textarea").value.trim();
+    var str = serviceStr + EOS;
     var dataTextArr = document.querySelectorAll(".add-data-textarea");
     for (var i = 0; i <= (dataTextArr.length - 1); i+=2) {
         if (!(dataTextArr[i].value == "" && dataTextArr[i + 1].value == "")) {
-            str += dataTextArr[i].value + EODT;
-            str += dataTextArr[i + 1].value + EOD;
+            str += dataTextArr[i].value.trim() + EODT;
+            str += encryptData(dataTextArr[i + 1].value.trim()) + EOD;
         } 
         else;
     }
     str += EOB;
-    getServiceArray();
+
+    // if there is no content, simply add encrypted data to passStr
+    // else find where to put then add encrypted data in that spot in passStr
+    if (!passStr)
+        passStr = str;
+    else  {
+
+    }
+    getServiceIndex();
 }
 
-function getServiceArray() {
+function encryptData(str) {
+    
+}
+
+function getServiceIndex(serviceStr) {
     var serviceArr = [], serviceArrIndexes = [0];
     // Example string
     passStr  = "service1{endofservice}title1{endofdatatitle}data1{endofdata}title2{endofdatatitle}data2{endofdata}title3{endofdatatitle}data3{endofdata}title4{endofdatatitle}data4{endofdata}{endofblock}service2{endofservice}title1{endofdatatitle}data1{endofdata}title2{endofdatatitle}data2{endofdata}title3{endofdatatitle}data3{endofdata}title4{endofdatatitle}data4{endofdata}{endofblock}service3{endofservice}title1{endofdatatitle}data1{endofdata}title2{endofdatatitle}data2{endofdata}title3{endofdatatitle}data3{endofdata}title4{endofdatatitle}data4{endofdata}{endofblock}";
@@ -166,8 +179,27 @@ function getServiceArray() {
     for (var j = 0; j <= (serviceArrIndexes.length - 2); j+=2) {
         serviceArr.push(passStr.slice(serviceArrIndexes[j], serviceArrIndexes[j + 1]));
     }
+
+    for (var k = 0; k <= (serviceArr.length - 2); k++) {
+        // if service should be sorted between two elements, greater than element, less than next element
+        if ((serviceStr.localeCompare(serviceArr[k]) == 1) && (serviceStr.localeCompare(serviceArr[k + 1]) == -1)) {
+            return passStr.indexOf(serviceArr[k + 1]);
+        }
+        // if service should be sorted at beginning of string
+        else if (serviceStr.localeCompare(serviceArr[k]) == -1) {
+            return 0;
+        }
+        // if service is equal to another service
+        else if (serviceStr.localeCompare(serviceArr[k]) == 0) {
+            return passStr.indexOf(serviceArr[k]);
+        }
+        // else service should be sorted at end of string
+        else if (k == (serviceArr.length - 2)) {
+            return passStr.indexOf(serviceArr[k + 1]);
+        }
+    }
     console.log(serviceArr);
-    return serviceArr;
+    
 }
 
 function cancelAddData() {
